@@ -80,15 +80,15 @@ namespace ATimeSynch
 
                     var elevationResult = TokenEvaluationType.TokenElevationTypeDefault;
 
-                    int elevationResultSize = Marshal.SizeOf((int)elevationResult);
+                    int elevationResultSize = Marshal.SizeOf((int) elevationResult);
                     uint returnedSize;
                     IntPtr elevationTypePtr = Marshal.AllocHGlobal(elevationResultSize);
 
                     bool success = GetTokenInformation(tokenHandle, TokenInformationClass.TokenElevationType,
-                        elevationTypePtr, (uint)elevationResultSize, out returnedSize);
+                        elevationTypePtr, (uint) elevationResultSize, out returnedSize);
                     if (success)
                     {
-                        elevationResult = (TokenEvaluationType)Marshal.ReadInt32(elevationTypePtr);
+                        elevationResult = (TokenEvaluationType) Marshal.ReadInt32(elevationTypePtr);
                         bool isProcessAdmin = elevationResult == TokenEvaluationType.TokenElevationTypeFull;
                         return isProcessAdmin;
                     }
